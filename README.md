@@ -1,6 +1,19 @@
 # docker-machine-gcp
 
 
+docker-machine create --driver google --google-project halogen-obelisk-269703 \
+--swarm \
+--swarm-master \
+--swarm-discovery token://858c2230b65ea61faba3ca585be99fab64a3222f5789e3f570add757e8281a89 \
+--swarm-strategy spread \
+--swarm-opt heartbeat=5s \
+swarm-manager
+
+
+docker-machine create --driver google --google-project halogen-obelisk-269703 \
+noed01
+
+
 sudo docker run -d -p 3376:3376 -v /etc/docker/:/certs:ro swarm manage --tlsverify --tlscacert=/certs/ca.pem --tlscert=/certs/server.pem --tlskey=/certs/server-key.pem -H tcp://0.0.0.0:3376 --strategy spread --advertise 34.70.150.251:3376 consul://35.226.201.10:8500
 
 
