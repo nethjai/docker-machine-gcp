@@ -64,3 +64,23 @@ sudo docker run -d swarm join --advertise 34.205.50.43:2376 consul://34.205.255.
 sudo docker ps
 
 
+The cluster creation has been done
+Now test the cluster:
+Login to base-machine and switch to root user
+
+mkdir -p ~/.docker
+cd ~/.docker
+copy the swarm-manager certificates to .docker folder.
+
+cp -r /home/ubuntu/.docker/machine/machines/swarm-manager/*.pem* ~/.docker/
+export the env for connecting the swarm-manager
+
+NOTE : change the tcp IP address with swarm-manager IP and this command will work for current terminal only
+
+export DOCKER_HOST=tcp://34.200.230.45:3376 DOCKER_TLS_VERIFY=1
+Check the swarm API version with below command
+
+docker version --format '{{.Server.Version}}'
+Now run the a test conatiner in cluster :
+
+docker run -d ngnix 
